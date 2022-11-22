@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'input_page.dart';
+import 'package:life_calculator/input_page.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.cyan,
+
         primaryColor: Colors.cyan
       ),
       home: const InputPage(),

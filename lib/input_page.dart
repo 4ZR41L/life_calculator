@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'widgets.dart';
+import 'package:life_calculator/widgets.dart';
 
-class InputPage extends StatelessWidget {
+class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
 
   @override
+  State<InputPage> createState() => _InputPageState();
+}
+
+class _InputPageState extends State<InputPage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.cyan,
       appBar: AppBar(
         backgroundColor: Colors.cyan,
         title: const Text(
@@ -16,28 +22,16 @@ class InputPage extends StatelessWidget {
       ),
       body: SafeArea(
           child: Column(
-        mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Expanded(
-            child: Row(
-              children: [Box(), Box()],
-            ),
-          ),
-          Expanded(
-            child: Box(),
-          ),
-          Expanded(
-            child: Box(),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Box(innerWidget: GenderBox(gender: 'male')),
-                Box(innerWidget: GenderBox(gender: 'female')),
-              ],
-            ),
-          ),
+          Expanded(flex: 1, child: Row(children: [Box(), Box()],)),
+          Box(),
+          Box(),
+          Expanded(flex: 1, child: Row(children: [Box(innerWidget: const GenderBox(gender: 'male',)), Box(innerWidget: const GenderBox(gender:'female'),)],)),
+
+
+
+
         ],
       )),
     );

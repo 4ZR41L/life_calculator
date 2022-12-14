@@ -7,12 +7,21 @@ class Controller extends GetxController {
   RxInt smokeCount = 0.obs;
   RxString gender = ''.obs;
 
-  void incrementUserData( dataType) {
+  void incrementUserData(dataType) {
     dataType == 'height' ? userHeight++ : userWeight++;
   }
 
-  void decrementUserData( dataType) {
+  void decrementUserData(dataType) {
     dataType == 'height' ? userHeight-- : userWeight--;
   }
 
+  double calculateUserLife() {
+    double result;
+
+    result = 70 + (userHeight.value / userWeight.value);
+    result = result + workoutCount.value - smokeCount.value;
+    result = gender.value == 'female' ? result + 5 : result + 2;
+
+    return result;
+  }
 }

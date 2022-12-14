@@ -11,13 +11,11 @@ import '../widgets/height_weight_box.dart';
 class InputScreen extends StatefulWidget {
   const InputScreen({Key? key}) : super(key: key);
 
-
   @override
   State<InputScreen> createState() => _InputScreenState();
 }
 
 class _InputScreenState extends State<InputScreen> {
-
   final controller = Get.put(Controller());
   @override
   Widget build(BuildContext context) {
@@ -51,7 +49,7 @@ class _InputScreenState extends State<InputScreen> {
                   ],
                 )),
             Box(innerWidget: SportBox()),
-             Box(
+            Box(
               innerWidget: SmokeBox(),
             ),
             Expanded(
@@ -67,32 +65,23 @@ class _InputScreenState extends State<InputScreen> {
                 ],
               ),
             ),
-            Center(
-              child: ElevatedButton(
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(
-                    Colors.white,
-                  ),
-                  padding: MaterialStatePropertyAll(
-                    EdgeInsetsDirectional.fromSTEB(80, 5, 80, 5),
-                  ),
-                ),
-                onPressed: () {
-                 Get.to(ResultScreen());
-                },
-                child: const Text(
-                  'CALCULATE',
-                  style: TextStyle(
-                    color: Colors.cyan,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
+            const SizedBox(
+              height: 50,
+            )
           ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () {
+          Get.to(ResultScreen());
+        },
+        child: const Icon(
+          Icons.calculate,
+          color: Colors.cyan,
         ),
       ),
     );
   }
 }
-

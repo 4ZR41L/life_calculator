@@ -1,30 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../constants.dart';
+import 'package:get/get.dart';
 
-int heightOfUser = 170;
-int weightOfUser = 70;
-class HeightWeightBox extends StatefulWidget {
+import '../constants.dart';
+import '../controller.dart';
+
+
+
+class HeightWeightBox extends StatelessWidget {
+
+  final controller = Get.put(Controller());
+
   final String typeOfBox;
 
-  const HeightWeightBox({super.key, required this.typeOfBox});
 
-  @override
-  State<HeightWeightBox> createState() => _HeightWeightBoxState();
-}
+  HeightWeightBox({
+    super.key,
+    required this.typeOfBox,
+  });
 
-class _HeightWeightBoxState extends State<HeightWeightBox> {
-
-
-  int getHeight() {
-    return heightOfUser;
-  }
-
-  int getWeight() {
-    return weightOfUser;
-  }
-
-  //late String typeOfBox = '';
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -38,17 +32,17 @@ class _HeightWeightBoxState extends State<HeightWeightBox> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.typeOfBox == 'height' ? "Height" : "Weight",
+                typeOfBox == 'height' ? "Height" : "Weight",
                 style: const TextStyle(fontSize: 25),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  widget.typeOfBox == 'height'
-                      ? heightOfUser.toString()
-                      : weightOfUser.toString(),
+                child: Obx(() => Text(
+                  typeOfBox == 'height'
+                      ? controller.userHeight.toString()
+                      : controller.userWeight.toString(),
                   style: font25,
-                ),
+                ),),
               ),
             ],
           ),
@@ -67,11 +61,9 @@ class _HeightWeightBoxState extends State<HeightWeightBox> {
                       color: Colors.cyan,
                     )),
                 onPressed: () {
-                  setState(() {
-                    widget.typeOfBox == 'height'
-                        ? heightOfUser++
-                        : weightOfUser++;
-                  });
+
+                  controller.incrementUserData(typeOfBox);
+
                 },
                 child: const Icon(
                   FontAwesomeIcons.plus,
@@ -89,11 +81,7 @@ class _HeightWeightBoxState extends State<HeightWeightBox> {
                       width: 1, color: Colors.cyan, style: BorderStyle.solid),
                 ),
                 onPressed: () {
-                  setState(() {
-                    widget.typeOfBox == 'height'
-                        ? heightOfUser--
-                        : weightOfUser--;
-                  });
+                  controller.decrementUserData(typeOfBox);
                 },
                 child: const Icon(
                   FontAwesomeIcons.minus,
@@ -108,3 +96,4 @@ class _HeightWeightBoxState extends State<HeightWeightBox> {
     );
   }
 }
+

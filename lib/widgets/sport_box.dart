@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:life_calculator/controller.dart';
 
 import '../constants.dart';
 
-int workoutCount = 0;
+class SportBox extends StatelessWidget {
+  SportBox({Key? key}) : super(key: key);
 
-class SportBox extends StatefulWidget {
-  const SportBox({Key? key}) : super(key: key);
+  final controller = Get.put(Controller());
 
-  @override
-  State<SportBox> createState() => _SportBoxState();
-}
-
-class _SportBoxState extends State<SportBox> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,24 +20,26 @@ class _SportBoxState extends State<SportBox> {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            workoutCount.toString(),
-            style: font25,
+          child: Obx(
+            () => Text(
+              controller.workoutCount.toString(),
+              style: font25,
+            ),
           ),
         ),
-        Slider.adaptive(
-          value: workoutCount.toDouble(),
-          onChanged: (value) {
-            setState(() {
-              workoutCount = value.toInt();
-            });
-          },
-          activeColor: Colors.cyan,
-          max: 7,
-          min: 0,
-          thumbColor: Colors.cyan,
-          inactiveColor: Colors.black45,
-          divisions: 7,
+        Obx(
+          () => Slider.adaptive(
+            value: controller.workoutCount.value.toDouble(),
+            onChanged: (value) {
+              controller.workoutCount.value = value.toInt();
+            },
+            activeColor: Colors.cyan,
+            max: 7,
+            min: 0,
+            thumbColor: Colors.cyan,
+            inactiveColor: Colors.black45,
+            divisions: 7,
+          ),
         ),
       ],
     );

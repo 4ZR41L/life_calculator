@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../controller.dart';
 import 'final_screen.dart';
 
 
 class ResultScreen extends StatelessWidget {
 
-  const ResultScreen({super.key});
+   ResultScreen({super.key});
 
-  static const routeName = '/extractArguments';
+
+  final controller = Get.put(Controller());
+
+
 
   @override
   Widget build(BuildContext context) {
+
+    final userHeight = controller.userHeight;
+    final userWeight = controller.userWeight;
+    final workoutCount = controller.workoutCount;
+    final smokeCount = controller.smokeCount;
+    final gender = controller.gender;
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -22,8 +35,8 @@ class ResultScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             const Text(
-              'Height: \nWeight:  \nWorkoutCount:  \nSmokeCount: \nGender: ',
+              Text(
+              'Height: $userHeight\nWeight:  $userWeight\nWorkoutCount:  $workoutCount\nSmokeCount: $smokeCount\nGender: $gender',
               textAlign: TextAlign.center,
             ),
             ElevatedButton(

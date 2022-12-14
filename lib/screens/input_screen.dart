@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:life_calculator/widgets/container_box.dart';
-import 'package:life_calculator/widgets/gender_box.dart';
-import 'package:life_calculator/widgets/height_weight_box.dart';
+import 'package:get/get.dart';
+import 'package:life_calculator/screens/result_screen.dart';
 import 'package:life_calculator/widgets/smoke_box.dart';
 import 'package:life_calculator/widgets/sport_box.dart';
+import '../controller.dart';
+import '../widgets/container_box.dart';
+import '../widgets/gender_box.dart';
+import '../widgets/height_weight_box.dart';
 
 class InputScreen extends StatefulWidget {
   const InputScreen({Key? key}) : super(key: key);
+
 
   @override
   State<InputScreen> createState() => _InputScreenState();
 }
 
 class _InputScreenState extends State<InputScreen> {
+
+  final controller = Get.put(Controller());
   @override
   Widget build(BuildContext context) {
-    Map userData = {
-      'height': heightOfUser,
-      'gender': 'male',
-      'smokeCount': smokeCount,
-      'weight': weightOfUser,
-      'workoutCount': workoutCount
-    };
-
     return Scaffold(
       //backgroundColor: Colors.cyan,
       appBar: AppBar(
@@ -40,31 +38,32 @@ class _InputScreenState extends State<InputScreen> {
             Expanded(
                 flex: 1,
                 child: Row(
-                  children: const [
+                  children: [
                     Box(
-                      innerWidget: HeightWeightBox(typeOfBox: 'height'),
+                      innerWidget: HeightWeightBox(
+                        typeOfBox: 'height',
+                      ),
                     ),
                     Box(
-                      innerWidget: HeightWeightBox(typeOfBox: 'weight'),
-                    )
+                        innerWidget: HeightWeightBox(
+                      typeOfBox: 'weight',
+                    ))
                   ],
                 )),
-            const Box(innerWidget: SportBox()),
-            const Box(
+            Box(innerWidget: SportBox()),
+             Box(
               innerWidget: SmokeBox(),
             ),
             Expanded(
               flex: 1,
               child: Row(
                 children: [
-                  Box(
-                    innerWidget: GenderBox(
-                      gender: 'male',
-                    ),
+                  GenderBox(
+                    widgetGender: 'male',
                   ),
-                  Box(
-                    innerWidget: GenderBox(gender: 'female'),
-                  )
+                  GenderBox(
+                    widgetGender: 'female',
+                  ),
                 ],
               ),
             ),
@@ -79,8 +78,7 @@ class _InputScreenState extends State<InputScreen> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/ResultScreen',
-                      arguments: userData);
+                 Get.to(ResultScreen());
                 },
                 child: const Text(
                   'CALCULATE',
@@ -97,3 +95,4 @@ class _InputScreenState extends State<InputScreen> {
     );
   }
 }
+

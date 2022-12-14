@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:life_calculator/screens/final_screen.dart';
 import 'package:life_calculator/screens/input_screen.dart';
 import 'package:life_calculator/screens/result_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   const MyApp({super.key});
+
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
               ColorScheme.fromSwatch().copyWith(secondary: Colors.cyan)),
       routes: {
         '/': (context) => const InputScreen(),
-        '/ResultScreen': (context) => const ResultScreen(),
+        '/ResultScreen': (context) =>  ResultScreen(),
         '/FinalScreen': (context) => const FinalScreen()
       },
     );

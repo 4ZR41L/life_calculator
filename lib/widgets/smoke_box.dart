@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:life_calculator/controller.dart';
 
 import '../constants.dart';
 
-int smokeCount = 0;
+class SmokeBox extends StatelessWidget {
+  SmokeBox({Key? key}) : super(key: key);
 
-class SmokeBox extends StatefulWidget {
-  const SmokeBox({Key? key}) : super(key: key);
+  final controller = Get.put(Controller());
 
-  @override
-  State<SmokeBox> createState() => _SmokeBoxState();
-}
-
-class _SmokeBoxState extends State<SmokeBox> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,26 +19,27 @@ class _SmokeBoxState extends State<SmokeBox> {
           "How many times do you smoke in a day?",
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            smokeCount.toString(),
-            style: font25,
+            padding: const EdgeInsets.all(8.0),
+            child: Obx(
+              () => Text(
+                controller.smokeCount.toString(),
+                style: font25,
+              ),
+            )),
+        Obx(
+          () => Slider.adaptive(
+            value: controller.smokeCount.toDouble(),
+            onChanged: (value) {
+              controller.smokeCount.value = value.toInt();
+            },
+            activeColor: Colors.cyan,
+            max: 30,
+            min: 0,
+            thumbColor: Colors.cyan,
+            inactiveColor: Colors.black45,
+            divisions: 30,
           ),
-        ),
-        Slider.adaptive(
-          value: smokeCount.toDouble(),
-          onChanged: (value) {
-            setState(() {
-              smokeCount = value.toInt();
-            });
-          },
-          activeColor: Colors.cyan,
-          max: 30,
-          min: 0,
-          thumbColor: Colors.cyan,
-          inactiveColor: Colors.black45,
-          divisions: 30,
-        ),
+        )
       ],
     );
   }

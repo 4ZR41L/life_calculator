@@ -1,28 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../controller.dart';
 
-
 class ResultScreen extends StatelessWidget {
-
-   ResultScreen({super.key});
-
+  ResultScreen({super.key});
 
   final controller = Get.put(Controller());
 
-
-
   @override
   Widget build(BuildContext context) {
-
     final userHeight = controller.userHeight;
     final userWeight = controller.userWeight;
     final workoutCount = controller.workoutCount;
     final smokeCount = controller.smokeCount;
     final gender = controller.gender;
     int avarageLife = controller.calculateUserLife().toInt();
-
-
 
     return Scaffold(
       appBar: AppBar(
@@ -35,11 +28,10 @@ class ResultScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-              Text(
+            Text(
               'Height: $userHeight\nWeight:  $userWeight\nWorkoutCount:  $workoutCount\nSmokeCount: $smokeCount\nGender: $gender\nYour avarage life is $avarageLife',
               textAlign: TextAlign.center,
             ),
-
           ],
         ),
       ),
